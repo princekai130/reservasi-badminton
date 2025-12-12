@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-6 text-white">Manajemen Lapangan Badminton</h1>
+    <h1 class="text-3xl font-bold mb-6 text-gray-500">Manajemen Lapangan Badminton</h1>
 
     <div class="flex justify-end mb-4">
         <a href="{{ route('admin.fields.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -43,7 +43,7 @@
                         @endif
                     </td>
                     <td class="py-2 px-4 border-b text-center">
-                        <a href="{{ route('admin.fields.edit', $field) }}" class="bg-green-600 text-black px-3 py-2 rounded">Edit</a>
+                        <a href="{{ route('admin.fields.edit', $field) }}" class="bg-yellow-600 text-black px-3 py-2 rounded">Edit</a>
                         
                         <form action="{{ route('admin.fields.destroy', $field) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus lapangan ini?');">
                             @csrf

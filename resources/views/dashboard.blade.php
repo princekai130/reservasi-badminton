@@ -7,6 +7,11 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if (app()->environment('local') && isset($fields))
+                <div class="mb-4 p-3 rounded bg-yellow-50 border border-yellow-200 text-yellow-800">
+                    DEBUG: Halaman dashboard dimuat. Jumlah lapangan: {{ $fields->count() }}
+                </div>
+            @endif
             <div class="flex items-center justify-between mb-6">
                 <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Dashboard</h1>
                 <p class="text-gray-500 text-sm">Selamat datang! Pilih lapangan untuk melakukan reservasi.</p>

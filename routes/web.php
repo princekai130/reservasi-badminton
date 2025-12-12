@@ -50,4 +50,10 @@ Route::get('/debug-admin-bookings', function () {
     return view('admin.bookings.index');
 });
 
+// DEBUG TEMP: buka dashboard tanpa middleware untuk cek apakah konten muncul
+Route::get('/debug-dashboard', function () {
+    $fields = \App\Models\Field::all();
+    return view('dashboard', compact('fields'));
+});
+
 require __DIR__.'/auth.php';

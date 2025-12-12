@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-6 text-white">Laporan Pendapatan Booking</h1>
+    <h1 class="text-3xl font-bold mb-6 text-gray-500">Laporan Pendapatan Booking</h1>
 
     {{-- Notifikasi --}}
     @if(session('success'))
@@ -63,7 +63,7 @@
         </p>
     </div>
 
-    <h2 class="text-3xl font-bold mb-6 text-white">Detail Booking Terkonfirmasi ({{ $reportData['bookings']->count() }} data)</h2>
+    <h2 class="text-3xl font-bold mb-6 text-gray-500">Detail Booking Terkonfirmasi ({{ $reportData['bookings']->count() }} data)</h2>
     
     {{-- 3. TABEL DETAIL BOOKING --}}
     <div class="overflow-x-auto bg-white shadow-lg rounded-lg">

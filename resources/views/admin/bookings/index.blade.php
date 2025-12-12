@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-6 text-white">Daftar & Manajemen Reservasi</h1>
+    <h1 class="text-3xl font-bold mb-6 text-gray-500">Daftar & Manajemen Reservasi</h1>
 
     {{-- Notifikasi Sukses/Warning dari Controller --}}
     @if(session('success'))
