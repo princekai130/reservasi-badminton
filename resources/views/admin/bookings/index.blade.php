@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-6 text-gray-800">Daftar & Manajemen Reservasi</h1>
+    <h1 class="text-3xl font-bold mb-6 text-white">Daftar & Manajemen Reservasi</h1>
 
     {{-- Notifikasi Sukses/Warning dari Controller --}}
     @if(session('success'))
@@ -61,7 +61,7 @@
                         <form action="{{ route('admin.bookings.cancel', $booking) }}" method="POST" class="inline">
                             @csrf
                             @method('PATCH')
-                            <button type="submit" class="bg-yellow-500 text-white px-3 py-1 rounded text-sm hover:bg-yellow-600">Batalkan</button>
+                            <button type="submit" aria-label="Batalkan reservasi" class="bg-amber-400 text-black px-3 py-1 rounded text-sm hover:bg-amber-500 hover:text-white border border-amber-500">Batalkan</button>
                         </form>
                         @endif
 

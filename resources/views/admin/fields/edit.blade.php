@@ -49,9 +49,10 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="photo_url">
                 Ganti Foto Lapangan
             </label>
-            @if ($field->photo_url)
+            @php $fileExists = $field->photo_url && \Illuminate\Support\Facades\Storage::disk('public')->exists($field->photo_url); @endphp
+            @if ($fileExists)
                 <p class="mb-2">Foto Saat Ini:</p>
-                <img src="{{ asset('storage/' . $field->photo_url) }}" alt="{{ $field->name }}" class="h-20 w-20 object-cover mb-2 border">
+                <img src="{{ \Illuminate\Support\Facades\Storage::url($field->photo_url) }}" alt="{{ $field->name }}" class="h-20 w-20 object-cover mb-2 border">
             @endif
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('photo_url') border-red-500 @enderror" 
                    id="photo_url" name="photo_url" type="file">

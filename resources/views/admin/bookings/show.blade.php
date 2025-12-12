@@ -99,7 +99,7 @@
             <form action="{{ route('admin.bookings.cancel', $booking) }}" method="POST" class="inline">
                 @csrf
                 @method('PATCH')
-                <button type="submit" class="bg-yellow-500 text-white px-3 py-2 rounded">Batalkan</button>
+                <button type="submit" aria-label="Batalkan reservasi" class="bg-amber-400 text-black px-3 py-2 rounded hover:bg-amber-500 hover:text-white border border-amber-500">Batalkan</button>
             </form>
 
             <form action="{{ route('admin.bookings.destroy', $booking) }}" method="POST" class="inline" onsubmit="return confirm('Hapus booking ini?')">

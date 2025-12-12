@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-6 text-gray-800">Pilih Lapangan untuk Reservasi</h1>
+    <h1 class="text-3xl font-bold mb-6 text-white">Pilih Lapangan untuk Reservasi</h1>
 
     @if(session('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -11,15 +11,15 @@
         </div>
     @endif
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         @forelse ($fields as $field)
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:scale-105 duration-200">
             
             {{-- Bagian Gambar Lapangan --}}
-            <div class="h-48 bg-gray-200 flex items-center justify-center relative">
-                @if($field->photo_url)
-                    {{-- Pastikan Anda sudah menjalankan 'php artisan storage:link' --}}
-                    <img src="{{ asset('storage/' . $field->photo_url) }}" alt="Foto Lapangan {{ $field->name }}" class="w-full h-full object-cover">
+            <div class="h-32 bg-gray-200 flex items-center justify-center relative">
+                @php $fileExists = $field->photo_url && \Illuminate\Support\Facades\Storage::disk('public')->exists($field->photo_url); @endphp
+                @if($fileExists)
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($field->photo_url) }}" alt="Foto Lapangan {{ $field->name }}" class="w-full h-full object-cover">
                 @else
                     <span class="text-gray-500">Foto Lapangan Tidak Tersedia</span>
                 @endif
@@ -27,9 +27,9 @@
 
             {{-- Bagian Detail --}}
             <div class="p-5">
-                <h2 class="text-2xl font-semibold text-gray-900 mb-2">{{ $field->name }}</h2>
+                <h2 class="text-lg font-semibold text-gray-900 mb-1">{{ $field->name }}</h2>
                 
-                <p class="text-3xl font-bold text-green-600 mb-3">
+                <p class="text-xl font-bold text-green-600 mb-2">
                     Rp {{ number_format($field->price_per_hour, 0, ',', '.') }}<span class="text-sm text-gray-500 font-normal">/ jam</span>
                 </p>
 
