@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth','admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('fields', App\Http\Controllers\Admin\FieldController::class);
     Route::resource('bookings', App\Http\Controllers\Admin\BookingController::class);
+    
+    // Laporan pendapatan (booking)
+    Route::get('reports', [App\Http\Controllers\Admin\BookingManagementController::class, 'reportIndex'])->name('reports.index');
 
     // opsi: route aksi konfirmasi / batal (jika controller pakai method confirm/cancel)
     Route::patch('bookings/{booking}/confirm', [App\Http\Controllers\Admin\BookingController::class, 'confirm'])->name('bookings.confirm');

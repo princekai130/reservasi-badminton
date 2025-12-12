@@ -28,6 +28,9 @@
                             <a href="{{ route('admin.fields.index') }}" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 text-sm font-medium">
                                 Manajemen Lapangan
                             </a>
+                            <a href="{{ route('admin.reports.index') }}" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 text-sm font-medium">
+                                Laporan
+                            </a>
                         @endif
                     @endauth
                 </div>

@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mx-auto p-4 max-w-lg">
-    <h1 class="text-2xl font-bold mb-4">Tambah Lapangan Baru</h1>
+    <h1 class="text-3xl font-bold mb-6 text-white">Tambah Lapangan Baru</h1>
 
     <form action="{{ route('admin.fields.store') }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded shadow">
         @csrf

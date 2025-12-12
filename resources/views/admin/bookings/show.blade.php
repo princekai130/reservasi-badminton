@@ -93,19 +93,19 @@
             <form action="{{ route('admin.bookings.confirm', $booking) }}" method="POST" class="inline">
                 @csrf
                 @method('PATCH')
-                <button type="submit" class="bg-green-600 text-white px-3 py-2 rounded">Konfirmasi</button>
+                <button type="submit" class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 transition duration-150 relative z-10 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-green-500">Konfirmasi</button>
             </form>
 
             <form action="{{ route('admin.bookings.cancel', $booking) }}" method="POST" class="inline">
                 @csrf
                 @method('PATCH')
-                <button type="submit" aria-label="Batalkan reservasi" class="bg-amber-400 text-black px-3 py-2 rounded hover:bg-amber-500 hover:text-white border border-amber-500">Batalkan</button>
+                <button type="submit" aria-label="Batalkan reservasi" class="bg-amber-400 text-black px-3 py-2 rounded hover:bg-amber-500 hover:text-white border border-amber-500 transition duration-150 relative z-10 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-amber-500">Batalkan</button>
             </form>
 
             <form action="{{ route('admin.bookings.destroy', $booking) }}" method="POST" class="inline" onsubmit="return confirm('Hapus booking ini?')">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="bg-red-600 text-white px-3 py-2 rounded">Hapus</button>
+                <button type="submit" class="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700 transition duration-150 relative z-10 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-red-500">Hapus</button>
             </form>
 
             <a href="{{ route('admin.bookings.index') }}" class="ml-auto text-sm text-gray-600">Kembali</a>
