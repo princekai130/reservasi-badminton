@@ -25,6 +25,9 @@
                             <a href="{{ route('admin.bookings.index') }}" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 text-sm font-medium">
                                 Manajemen Reservasi
                             </a>
+                            <a href="{{ route('admin.fields.index') }}" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 text-sm font-medium">
+                                Manajemen Lapangan
+                            </a>
                         @endif
                     @endauth
                 </div>
@@ -53,7 +56,7 @@
                 @auth
                     <div class="flex items-center gap-4">
                         <a href="{{ route('profile.edit') }}" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-sm font-medium">
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->name }} @if(Auth::user()?->is_admin) <span class="text-xs text-green-600">(Admin)</span> @endif
                         </a>
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
@@ -100,7 +103,7 @@
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-700">
             @auth
                 <div class="px-4 py-2">
-                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }} @if(Auth::user()?->is_admin) <span class="text-xs text-green-600">(Admin)</span> @endif</div>
                     <div class="font-medium text-sm text-gray-500 dark:text-gray-400">{{ Auth::user()->email }}</div>
                 </div>
 
