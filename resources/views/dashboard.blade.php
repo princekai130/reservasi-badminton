@@ -1,51 +1,77 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if (app()->environment('local') && isset($fields))
-                <div class="mb-4 p-3 rounded bg-yellow-50 border border-yellow-200 text-yellow-800">
-                    DEBUG: Halaman dashboard dimuat. Jumlah lapangan: {{ $fields->count() }}
-                </div>
-            @endif
-            <div class="flex items-center justify-between mb-6">
-                <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Dashboard</h1>
-                <p class="text-gray-500 text-sm">Selamat datang! Pilih lapangan untuk melakukan reservasi.</p>
-            </div>
+@section('hero')
+<section class="relative overflow-hidden court-bg">
+    <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 via-green-500 to-sky-600 opacity-90 dark:opacity-80"></div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                @forelse ($fields as $field)
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition transform hover:scale-105 duration-200">
-                    <div class="h-32 bg-gray-200 overflow-hidden relative">
-                        @php $fileExists = $field->photo_url && \Illuminate\Support\Facades\Storage::disk('public')->exists($field->photo_url); @endphp
-                        @if ($fileExists)
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url($field->photo_url) }}" alt="{{ $field->name }}" class="w-full h-full object-cover">
-                        @else
-                            <div class="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-700">
-                                <span class="text-gray-500 dark:text-gray-400 text-sm">Foto tidak tersedia</span>
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="p-3">
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-1 line-clamp-1">{{ $field->name }}</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-2 line-clamp-2">{{ $field->description ?? 'Lapangan badminton berkualitas' }}</p>
-                        <div class="flex items-center justify-between">
-                            <div class="text-lg font-bold text-green-600">Rp {{ number_format($field->price_per_hour, 0, ',', '.') }}</div>
-                            <a href="{{ route('booking.create', $field->id) }}" class="text-sm bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded">Pesan</a>
-                        </div>
-                    </div>
-                </div>
-                @empty
-                <div class="col-span-full bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-center">
-                    <p class="text-gray-500">Belum ada lapangan yang tersedia.</p>
-                </div>
-                @endforelse
+    <div class="relative max-w-7xl mx-auto px-4 py-16 sm:py-20 lg:py-28">
+        <div class="flex flex-col md:flex-row items-center gap-10">
+            <div class="flex-1 text-white">
+                <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+                    Reservasi Badminton
+                </h1>
+                <p class="mt-4 text-lg opacity-95">
+                    Pesan lapangan dan jadwal latihan.
+                </p>
             </div>
         </div>
     </div>
-</x-app-layout>
+</section>
+@endsection
+
+@section('content')
+@php
+use App\Models\Field;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
+/* ambil fields jika belum dikirim dari controller */
+$fields = $fields ?? Field::query()->latest()->take(6)->get();
+
+if (! function_exists('fieldImageUrl')) {
+    function fieldImageUrl($path) {
+        if (!$path) return asset('images/placeholder-field.png');
+        if (Str::startsWith($path, ['http://','https://'])) return $path;
+        if (Str::startsWith($path, '/storage/')) return $path;
+        if (Storage::disk('public')->exists($path)) return Storage::url($path);
+        $trimmed = preg_replace('#^public/#','',$path);
+        if (Storage::disk('public')->exists($trimmed)) return Storage::url($trimmed);
+        return asset('images/placeholder-field.png');
+    }
+}
+@endphp
+
+<div class="container mx-auto px-4 py-10">
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h2 class="text-2xl font-extrabold text-gray-900 dark:text-gray-100">Lapangan Pilihan</h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Beberapa lapangan populer & terbaru — lihat detail lapangan untuk informasi lebih lengkap.</p>
+        </div>
+
+        <a href="{{ route('fields.index') }}" class="text-sm text-emerald-600 hover:underline dark:text-emerald-400">Lihat Semua Lapangan →</a>
+    </div>
+
+    @if($fields->isEmpty())
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-8 text-center text-gray-500 dark:text-gray-300">
+            Tidak ada lapangan untuk ditampilkan saat ini.
+        </div>
+    @else
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            @foreach($fields as $field)
+                @php $photo = fieldImageUrl($field->photo_url); @endphp
+                <article class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="relative h-44 bg-gray-100 dark:bg-gray-700">
+                        <img src="{{ $photo }}" alt="Foto {{ $field->name }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        <div class="absolute left-4 bottom-3 right-4 text-white">
+                            <h3 class="text-lg font-semibold leading-tight">{{ $field->name }}</h3>
+                            <p class="mt-1 text-xs opacity-90 line-clamp-2">{{ $field->description ?? 'Tidak ada deskripsi tersedia.' }}</p>
+                        </div>
+                    </div>
+                </article>
+            @endforeach
+        </div>
+    @endif
+</div>
+@endsection
+

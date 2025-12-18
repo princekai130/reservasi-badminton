@@ -10,7 +10,7 @@ Route::get('/test-ping', function () {
 });
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('welcome');
 });
 
 // Rute PUBLIC untuk melihat daftar lapangan

@@ -23,14 +23,20 @@
     @vite(['resources/css/app.css', 'resources/js/app.js']) 
 </head>
 <body class="font-sans antialiased bg-white dark:bg-gray-900">
-    <div class="min-h-screen">
-        {{-- Memanggil komponen navigasi --}}
+    <div class="min-h-screen flex flex-col">
+        {{-- Navbar --}}
         @include('layouts.navigation')
 
-        {{-- Slot untuk konten halaman --}}
-        <main>
+        {{-- HERO KHUSUS --}}
+        @yield('hero')
+
+        {{-- Konten --}}
+        <main class="flex-1">
             @yield('content')
         </main>
+
+        {{-- Footer --}}
+        @include('layouts.footer')
     </div>
 
     {{-- Script toggle theme --}}

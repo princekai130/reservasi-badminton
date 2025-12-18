@@ -3,7 +3,7 @@
         <div class="flex justify-between h-16">
             <div class="flex items-center">
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('fields.index') }}" class="flex items-center gap-2">
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
                         <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M3 9.75L12 3l9 6.75M4.5 10.5v9A1.5 1.5 0 006 21h12a1.5 1.5 0 001.5-1.5v-9" />

@@ -1,9 +1,8 @@
-
 @extends('layouts.app')
 
 @section('content')
 <div class="container mx-auto p-4 max-w-lg">
-    <h1 class="text-3xl font-bold mb-6 text-white">Tambah Lapangan Baru</h1>
+    <h1 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Tambah Lapangan Baru</h1>
 
     <form action="{{ route('admin.fields.store') }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded shadow">
         @csrf
@@ -27,7 +26,12 @@
 
         <div class="mb-4">
             <label class="block text-sm font-medium mb-1">Foto (opsional)</label>
-            <input name="photo_url" type="file" class="w-full">
+
+            <div class="mb-2">
+                <img id="photo-preview" src="{{ asset('images/placeholder-field.png') }}" alt="Preview" class="w-48 h-32 object-cover rounded hidden">
+            </div>
+
+            <input name="photo_url" id="photo_url" type="file" accept="image/*" class="w-full">
             @error('photo_url') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
         </div>
 
@@ -37,4 +41,14 @@
         </div>
     </form>
 </div>
+
+<script>
+document.getElementById('photo_url').addEventListener('change', function(e){
+  const file = e.target.files[0];
+  const img = document.getElementById('photo-preview');
+  if (!file) { img.classList.add('hidden'); return; }
+  img.src = URL.createObjectURL(file);
+  img.classList.remove('hidden');
+});
+</script>
 @endsection
