@@ -137,8 +137,6 @@
             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                 <thead class="sticky top-0 bg-gray-50 dark:bg-gray-900">
                     <tr>
-                        <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">ID</th>
-                        <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">User</th>
                         <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Lapangan</th>
                         <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Waktu Mulai</th>
                         <th class="py-3 px-6 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Total Harga</th>
@@ -148,8 +146,6 @@
                 <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                     @forelse ($reportData['bookings'] as $booking)
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-900 transition">
-                            <td class="py-4 px-6 text-sm text-gray-700 dark:text-gray-200">{{ $booking->id }}</td>
-                            <td class="py-4 px-6 text-sm text-gray-700 dark:text-gray-200">{{ $booking->user->name ?? 'N/A' }}<div class="text-xs text-gray-400">{{ $booking->user->email ?? '' }}</div></td>
                             <td class="py-4 px-6 text-sm font-medium text-gray-700 dark:text-gray-200">{{ $booking->field->name ?? 'N/A' }}</td>
                             <td class="py-4 px-6 text-sm text-gray-700 dark:text-gray-200">{{ \Carbon\Carbon::parse($booking->start_time)->format('d M Y, H:i') }}</td>
                             <td class="py-4 px-6 text-sm text-right font-semibold text-emerald-600 dark:text-emerald-400">Rp {{ number_format($booking->total_price, 0, ',', '.') }}</td>
