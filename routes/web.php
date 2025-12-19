@@ -11,7 +11,8 @@ Route::get('/test-ping', function () {
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
 
 // Rute PUBLIC untuk melihat daftar lapangan
 Route::get('/fields', [FieldController::class, 'index'])->name('fields.index');
