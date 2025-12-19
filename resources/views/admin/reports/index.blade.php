@@ -138,7 +138,6 @@
                 <thead class="sticky top-0 bg-gray-50 dark:bg-gray-900">
                     <tr>
                         <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Lapangan</th>
-                        <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Waktu Mulai</th>
                         <th class="py-3 px-6 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Total Harga</th>
                         <th class="py-3 px-6 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase">Status</th>
                     </tr>
@@ -147,7 +146,6 @@
                     @forelse ($reportData['bookings'] as $booking)
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-900 transition">
                             <td class="py-4 px-6 text-sm font-medium text-gray-700 dark:text-gray-200">{{ $booking->field->name ?? 'N/A' }}</td>
-                            <td class="py-4 px-6 text-sm text-gray-700 dark:text-gray-200">{{ \Carbon\Carbon::parse($booking->start_time)->format('d M Y, H:i') }}</td>
                             <td class="py-4 px-6 text-sm text-right font-semibold text-emerald-600 dark:text-emerald-400">Rp {{ number_format($booking->total_price, 0, ',', '.') }}</td>
                             <td class="py-4 px-6 text-center">
                                 <span class="inline-flex items-center px-3 py-1 text-sm font-semibold rounded-full {{ $booking->status === 'confirmed' ? 'bg-green-50 text-green-800 dark:bg-green-900/20 dark:text-green-300' : 'bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-200' }}">
